@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/header.ejs") %>
+</head>
+<body>
+    <%- include("./partials/nav.ejs") %>
+    <div class="texts" style="margin: 2rem;">
+        <h1>Hoşgeldin, <%= user.username %></h1>
+        <p>Hadi gönderileri düzenleyelim.Gönderileri düzenlemek için başlığın üzerine silmek için sil buttonuna tıklayınız.</p>
+        <a style="text-decoration: none;" href="/admin/create-post">+Gönderi oluştur.</a>
+    </div>
+    <div class="section card" style="margin:2rem">
+        <h1 class="card-title text-center" style="padding: 0.5rem;">Gönderiler</h1>
+        <% if(blogs.length !== 0) {%>
+            <% blogs.forEach(blog=>{%>
+                <div class="card" style="margin: 1.25rem;display: flex;align-items: center;flex-direction: row;justify-content: space-between;">
+                    <a href="/admin/edit-post/<%= blog._id %>" style="padding:1.25rem;" class="card-title"><%= blog.title%></a>
+                </div>
+            <% }) %>
+        <%}%>
+        <%if(blogs.length === 0){%>
+            <div class="text-center">
+                <p>Henüz bir gönderi oluşturulmamış,ilk gönderiyi sen oluştur.</p>
+            </div>
+        <%}%>
+    </div>
+
+
+
+
+
+
+
+
+
+    <script type="text/javascript">
+        const deleteBtn = document.querySelector(".delete");
+
+        deleteBtn.addEventListener("click" , (e)=>{
+          const endpoint = `/admin/edit-post/${deleteBtn.dataset.doc}`;
+          fetch(endpoint, {
+            method:"DELETE"
+          })
+          .then(response=>response.json())
+          .then(data=>{
+            const div = document.createElement("div");
+            
+            div.className = "alert alert-success"
+            div.textContent = "Başarıyla silindi!";
+            alertsDiv.appendChild(div);
+
+            setInterval(function(){
+                div.remove();
+                window.location.href= data.redirect
+            } , 2000)
+          })
+          .catch(err=>console.log(err))  
+        })
+    </script>
+
+
+
+
+    <%- include("./partials/footer.ejs") %>
+</body>
+</html>

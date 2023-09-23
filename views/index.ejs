@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/header.ejs") %>
+<body>  
+    <%- include("./partials/nav.ejs") %>
+    <div class="index-card">
+        <%if(blogs.length !== 0){%>
+        <% blogs.forEach((blog)=>{ %>
+        <div class="card" style="width:18rem;padding: 1.25rem;margin: 1rem;">
+                <img src="<%= blog.img %>" style="max-height: 10rem;" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"><%= blog.title %></h5>
+                    <p class="card-text"><%= blog.snippets %></p>
+                    <a href="/blog/<%= blog._id %>" class="btn btn-dark">Yazıya Git</a>
+                </div>
+        </div>
+        <% }) %>
+        <%}%>
+        <%if(blogs.length === 0){%>
+        <div class="text-center">
+            <p>Henüz bir gönderi oluşturulmamış.</p>
+        </div>
+        <%}%>
+    </div>
+    <%- include("./partials/footer.ejs") %>
+</body>
+</html>

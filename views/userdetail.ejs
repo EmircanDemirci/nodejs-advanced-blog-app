@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/header.ejs") %>
+</head>
+<body>
+    <%- include("./partials/nav.ejs") %>
+    <div class="texts" style="margin: 2rem;">
+        <h1>Hoşgeldin, <%= user.username %></h1>
+        <p>İşte bu kullanıcının bilgileri.</p>
+    </div>
+    <div class="card" style="margin: 2rem;">
+        <div class="card-body">
+            <h1 class="card-title text-center">Kullanıcı</h1>
+            <div class="username" style="display: flex;align-items: center;flex-direction: row">
+                <p style="font-weight: bolder;">Kullanıcı Adı:</p>
+                <p><%=usdetails.username%></p>
+            </div>
+            <div class="email" style="display: flex;align-items: center;flex-direction: row">
+                <p style="font-weight: bolder;">Email:</p>
+                <p><%=usdetails.email%></p>
+            </div>
+            <div class="date" style="display: flex;align-items: center;flex-direction: row">
+                <p style="font-weight: bolder;">Kurulma Tarihi:</p>
+                <p><%=usdetails.date%></p>
+            </div>
+            <div class="alerts">
+
+            </div>
+            <% if(user.username!==usdetails.username && user.date !== usdetails.date){ %>
+                <a style="padding: 0.25rem 1.25rem;margin-right: 1rem;" data-do="<%= user._id %>" data-doc="<%= usdetails._id %>" class="delete btn btn-danger text-light">Sil</a>
+            <%}%>
+        </div>
+    </div>
+    <%- include("./partials/footer.ejs") %>
+
+    <script type="text/javascript">
+        const deleteBtn = document.querySelector(".delete");
+        const alertsDiv = document.querySelector(".alerts")
+
+        deleteBtn.addEventListener("click" , (e)=>{
+        
+        
+          const endpoint = `/admin/users/${deleteBtn.dataset.doc}`;
+          console.log(deleteBtn.dataset.doc)
+          fetch(endpoint, {
+            method:"DELETE"
+          })
+          .then(response=>response.json())
+          .then(data=>{
+            const div = document.createElement("div");
+            
+            div.className = "alert alert-success"
+            div.textContent = "Başarıyla silindi!";
+            alertsDiv.appendChild(div);
+
+            setInterval(function(){
+                div.remove();
+                window.location.href= data.redirect
+            } , 2000)
+        })
+          .catch(err=>console.log(err))  
+        })
+    </script>
+</body>
+</html>

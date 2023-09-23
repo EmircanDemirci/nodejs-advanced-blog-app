@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/header.ejs") %>
+</head>
+<body>
+    <%- include("./partials/nav.ejs") %>
+    <div class="texts" style="margin: 2rem;">
+        <h1>Hoşgeldin, <%= user.username %></h1>
+        <p>Hadi kullanıcıları görelim.</p>
+        <a style="text-decoration: none;" href="/admin/users/create">+Yeni kullanıcı ekle.</a>
+    </div>
+    <div class="section card" style="margin:2rem">
+        <h1 class="card-title text-center" style="padding: 0.5rem;">Kullanıcılar</h1>
+        <% users.forEach(us=>{%>
+            <div class="card" style="margin: 1.25rem;display: flex;align-items: center;flex-direction: row;justify-content: space-between;">
+                <a href="/admin/users/detail/<%= us._id%>" style="padding:1.25rem;" class="card-title"><%= us.username%></a>
+            </div>
+        <% }) %>
+    </div>
+    <%- include("./partials/footer.ejs") %>
+
+</body>
+</html>

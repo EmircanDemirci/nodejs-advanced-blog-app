@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/header.ejs") %>
+</head>
+
+<body>
+    <%- include("./partials/nav.ejs") %>
+        <div class="texts" style="margin: 2rem;">
+            <p>Hadi gönderiyi düzenleyelim.</p>
+        </div>
+        <div class="section card" style="margin: 2rem;">
+            <form class="form-3" style="margin: 2rem; padding: 2rem;">
+                <label for="exampleFormControlInput1">Başlık</label>
+                <input type="text" name="title" class="form-control" id="exampleFormControlInput1"
+                    value="<%= blog.title %>" placeholder="Yaratıcı bir şeyler deneyin">
+                <label for="exampleFormControlInput2">Resim</label>
+                <input type="text" name="img" class="form-control" id="exampleFormControlInput2" value="<%= blog.img %>">
+                <label for="exampleFormControlInput3">Kısa açıklama</label>
+                <input type="text" name="snippets" class="form-control" id="exampleFormControlInput3"
+                    value="<%= blog.snippets %>" placeholder="Gönderiyle ilgili kısa bir açıklama yazın">
+                <label for="exampleFormControlTextarea4">Gönderi</label>
+                <textarea class="form-control" name="body" id="exampleFormControlTextarea4"
+                    rows="3"><%= blog.body%></textarea>
+                <div class="alerts">
+
+                </div>
+                <div class="text-center" style="margin: 2rem;">
+                    <a style="padding: 0.25rem 1.25rem;margin-right: 1rem;" data-doc="<%= blog._id %>" class="delete btn btn-danger text-light">Sil</a>
+                </div>
+            </form>
+        </div>
+
+        <%- include("./partials/footer.ejs") %>
+            <script type="text/javascript">
+                const deleteBtn = document.querySelector(".delete");
+                const alertsDiv = document.querySelector(".alerts");
+
+                deleteBtn.addEventListener("click", (e) => {
+                    const endpoint = `/admin/edit-post/${deleteBtn.dataset.doc}`;
+                    fetch(endpoint, {
+                        method: "DELETE"
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            const div = document.createElement("div");
+
+                            div.className = "alert alert-success"
+                            div.textContent = "Başarıyla silindi!";
+                            alertsDiv.appendChild(div);
+
+                            setInterval(function () {
+                                div.remove();
+                                window.location.href = data.redirect
+                            }, 2000)
+                        })
+                        .catch(err => console.log(err))
+                })
+            </script>
+</body>
+
+</html>

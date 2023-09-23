@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Venoox'un Günlüğü</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Ana Sayfa</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">Hakkımda</a>
+        </li>
+        <%if(user===undefined){%>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin">Giriş Yap</a>
+        </li>
+        <%}%>
+        <%if(user!== undefined){%>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin">Dashboard</a>
+          </li>
+        <%}%>
+      </ul>
+    </div>
+    <script type="text/javascript">
+        const toggleBtn = document.querySelector(".navbar-toggler");
+        const toggleIcon = document.querySelector(".navbar-toggler-icon")
+        const navbar = document.querySelector(".navbar-collapse")
+
+        toggleBtn.addEventListener("click" , ()=>{
+          navbar.classList.toggle("active")
+        })
+    </script>
+  </nav>
+

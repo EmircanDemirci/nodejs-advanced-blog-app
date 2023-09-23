@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/header.ejs") %>
+</head>
+<body>
+    <%- include("./partials/nav.ejs") %>
+    <div class="post-section">
+        <div class="title">
+            <hr>
+            <h1><%= blog.title %></h1>
+            <p><%= blog.createdAt%> by <a href="#">Mark</a></p>
+            <hr>
+            <div class="image text-center">
+                <img style="width: 100%;" src="<%= blog.img %>"/>
+            </div>
+            <p><%= blog.body %></p>
+        </div>
+    </div>
+    <%- include("./partials/footer.ejs") %>
+</body>
+</html>

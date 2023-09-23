@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/header.ejs") %>
+</head>
+<body>
+    <%- include("./partials/nav.ejs") %>
+    <%if(user===undefined){%>
+    <div class="section">
+        <div class="login">
+            <div class="card">
+                <h1 class="text-center">Admin Login</h1>
+                <form action="/admin" method="post" class="card-body">
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Email address</label>
+                      <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                      <div id="emailHelp" class="form-text">Admin değilsen uzaklaş.</div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">Şifre</label>
+                      <input type="password" name="password" class="form-control" id="exampleInputPassword1" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Devam</button>
+                  </form>
+            </div>
+        </div>
+    </div>
+    <%}%>
+    <%if(user !== undefined){%>
+      <div class="texts" style="margin: 2rem;">
+        <h1>Hoşgeldin, <%= user.username %></h1>
+        <p>Bu gün ne yapmak istersin?</p>
+      </div>
+      <div>
+        <ul style="list-style-type: none;">
+          <li><a style="text-decoration: none;" href="/admin/users">+Kullanıcıları gör.</a></li>
+          <li><a style="text-decoration: none;" href="/admin/edit-post">+Gönderileri düzenle.</a></li>
+        </ul>
+      </div>
+    <%}%>
+    <%- include("./partials/footer.ejs") %>
+</body>
+</html>

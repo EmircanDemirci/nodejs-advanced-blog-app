@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/header.ejs") %>
+</head>
+<body>
+    <%- include("./partials/nav.ejs") %>
+    <div class="texts" style="margin: 2rem;">
+        <h1>Hoşgeldin, <%= user.username %></h1>
+        <p>Hadi yeni bir kullanıcı oluşturalım.</p>
+    </div>
+    <div class="section card" style="margin: 2rem;">
+        <form action="/admin/users/create" method="post" class="form-group card-body">
+            <label for="exampleFormControlInput1">Kullanıcı Adı</label>
+            <input type="text" name="username" class="form-control" id="exampleFormControlInput1" placeholder="Yaratıcı bir şeyler deneyin" required>
+            <label for="exampleFormControlInput2">Email</label>
+            <input type="email" name="email" class="form-control" id="exampleFormControlInput2" placeholder="Emailinizi girin" required>
+            <label for="exampleFormControlInput3">Şifre</label>
+            <input type="password" name="password" class="form-control" id="exampleFormControlInput3" placeholder="Şifrenizi girin" required>
+            <div class="text-center" style="margin: 2rem;">
+                <input type="submit" class="btn btn-dark text"></input>
+            </div>
+        </form>
+    </div>
+    <%- include("./partials/footer.ejs") %>
+</body>
+</html>
