@@ -6,7 +6,7 @@ const blogRouter = require("./router/blogRouter");
 const adminRouter = require("./router/adminRouter");
 const app = express();
 
-const dbURI = "mongodb+srv://venoox:test1234@cluster0.a9ct3mq.mongodb.net/"
+const dbURI = "-----"
 
 mongoose.connect(dbURI)
 .then(result => app.listen(4000))
